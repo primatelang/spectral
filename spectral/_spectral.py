@@ -159,9 +159,9 @@ class Spectral(object):
                                       upperf,
                                       self.nfilt+2))/self.fs).astype(np.uint)
         for filt in xrange(self.nfilt):
-            left = edges[filt]
-            center = edges[filt+1]
-            right = edges[filt+2]
+            left = int(edges[filt])
+            center = int(edges[filt+1])
+            right = int(edges[filt+2])
             filts[left:center+1, filt] = (np.arange(left, center+1) - left) /\
                                          (center - left)
             filts[center:right+1, filt] = (right - np.arange(center, right+1)) /\
