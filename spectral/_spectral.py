@@ -316,9 +316,9 @@ class Spectral(object):
         s = np.pad(sig, (self.wlen//2, 0), 'constant')
         cols = np.ceil((s.shape[0] - self.wlen) / self.fshift + 1)
         s = np.pad(s, (0, self.wlen), 'constant')
-        frames = as_strided(s, shape=(cols, self.wlen),
-                            strides=(s.strides[0]*self.fshift,
-                                     s.strides[0])).copy()
+        frames = as_strided(s, shape=(int(cols), int(self.wlen)),
+                            strides=(int(s.strides[0]*self.fshift),
+                                     int(s.strides[0]))).copy()
         return np.fft.rfft(frames*self.win, self.nfft)
 
     def _build_dctmtx(self):
