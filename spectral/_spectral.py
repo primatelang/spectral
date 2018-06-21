@@ -162,6 +162,16 @@ class Spectral(object):
             left = int(edges[filt])
             center = int(edges[filt+1])
             right = int(edges[filt+2])
+            
+            # As some scales are logarithmic, thre are close repeted
+            # values of the indexes when nfilt is high, 
+            # that generate a division by 0 in 'filts',
+            # then I am moving the index one sample that happends
+            if (center - left) == 0:
+                left -= 1 
+            if (right - center) == 0:
+                right += 1
+            
             filts[left:center+1, filt] = (np.arange(left, center+1) - left) /\
                                          (center - left)
             filts[center:right+1, filt] = (right - np.arange(center, right+1)) /\
